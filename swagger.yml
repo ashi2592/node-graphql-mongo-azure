@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: Store Product
+  description: |-
+    Curd operations in node js using Azure function model 3  
+      
+    Version : 1
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: http://localhost:7071
+paths:
+  /api/v1/product/:
+    post:
+      summary: Add Product
+      description: Add single product
+      operationId: addProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productImageurl:
+                  type: string
+                  example: img
+                productName:
+                  type: string
+                  example: Product 1
+            examples:
+              Add Product:
+                value:
+                  productImageurl: img
+                  productName: Product 1
+      responses:
+        '200':
+          description: ''
+  /api/v1/products:
+    get:
+      summary: Get Products
+      description: Get products with limit and page
+      operationId: getProducts
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '{{page}}'
+        - name: limit
+          in: query
+          schema:
+            type: string
+            example: '{{limit}}'
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Get Products:
+                value: ''
+      responses:
+        '200':
+          description: ''
+    post:
+      summary: Add Products
+      description: Add Multiple products at time
+      operationId: addProducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  productName:
+                    type: string
+                    example: Product 3
+              example:
+                - productName: Product 3
+                - productName: Product 4
+            examples:
+              Add Products:
+                value:
+                  - productName: Product 3
+                  - productName: Product 4
+      responses:
+        '200':
+          description: ''
+  /api/v1/product/{id}:
+    get:
+      summary: Get Product by Id
+      description: Get Product details by id
+      operationId: getProductById
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Get Product by Id:
+                value: ''
+      responses:
+        '200':
+          description: ''
+    put:
+      summary: Update Product id
+      description: Update Product id
+      operationId: updateProductId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productName:
+                  type: string
+                  example: ashish
+            examples:
+              Update Product id:
+                value:
+                  productName: ashish
+      responses:
+        '200':
+          description: ''
+    delete:
+      summary: Delete Product id
+      description: Delete Product by id
+      operationId: deleteProductId
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Delete Product id:
+                value: ''
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+tags: []

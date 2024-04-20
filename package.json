@@ -1,0 +1,19 @@
+{
+  "name": "store-product",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "joi": "^17.12.3",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.3.1",
+    "mongoose-paginate-v2": "^1.8.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-dist": "^5.16.2",
+    "swagger-ui-express": "^5.0.0",
+    "yamljs": "^0.3.0"
+  }
+}
