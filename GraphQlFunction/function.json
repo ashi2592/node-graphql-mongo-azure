@@ -1,4 +1,5 @@
 {
+  "disabled": false,
   "bindings": [
     {
       "authLevel": "function",
@@ -6,14 +7,14 @@
       "direction": "in",
       "name": "req",
       "methods": [
+        "get",
         "post"
-      ],
-      "route": "v1/products"
+      ]
     },
     {
       "type": "http",
       "direction": "out",
-      "name": "res"
+      "name": "$return"
     }
   ]
 }

@@ -67,55 +67,58 @@ class ProductServices {
      * @returns 
      */
 
-        async getProducts(data) {
-            try {
-                const values = await GetProductsSchemaValidation(data);
-                if (values) {
-                    const options = {
-                        page: data?.page || 1,
-                        limit: data?.limit || 100
-                      };
-                    
-                      return await Products.paginate({},options)
-                }
-            } catch (err) {
-                throw err
-            }
-        }
+    async getProducts(data) {
+        try {
+            const values = await GetProductsSchemaValidation(data);
+            if (values) {
+                const options = {
+                    page: data?.page || 1,
+                    limit: data?.limit || 100
+                };
 
-        /**
-         * 
-         * @param {*} data 
-         * @returns 
-         */
-        async deleteProduct(data){
-            try {
-                const values = await DeleteProductSchemaValidation(data);
-                if(values) {
-                   return await Products.findByIdAndDelete(data.id);
-                }
-            } catch (err) {
-                throw err
+                return await Products.paginate({}, options)
             }
+        } catch (err) {
+            throw err
         }
+    }
 
-        /**
-         * Update Product
-         * @param {*} data 
-         * @param {*} query 
-         * @returns 
-         */
-        async UpdateProduct(data, query)
-        {
-            try {
-                const values = await UpdateProductsSchemaValidation(data);
-                if(values){
-                    return await Products.findByIdAndUpdate(query.id,data);
-                }
-            } catch (err) {
-                throw err
+    /**
+     * 
+     * @param {*} data 
+     * @returns 
+     */
+    async deleteProduct(data) {
+        try {
+            const values = await DeleteProductSchemaValidation(data);
+            if (values) {
+                return await Products.findByIdAndDelete(data.id);
             }
+        } catch (err) {
+            throw err
         }
+    }
+
+    /**
+     * Update Product
+     * @param {*} data 
+     * @param {*} query 
+     * @returns 
+     */
+    async UpdateProduct(data, id) {
+        try {
+            const values = await UpdateProductsSchemaValidation(data);
+            if (values) {
+                const productObject =  await Products.findById(id);
+                productObject.productName = data.productName;
+                productObject.productImageurl = data.productImageurl;
+                const response = await productObject.save()
+                return response;
+            }
+        } catch (err) {
+            throw err
+        }
+    }
 }
 
 module.exports = new ProductServices()
